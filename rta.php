@@ -21,26 +21,10 @@ $vas= array();
 			//try true ID first
 		$id2=trueid($id_tmp);
 		//if gt bib contain x
-	//	if(is_numeric(substr($id2[0],-1))){
+
 			$info=request_status($id2[0],'bibid');
-	//	}else{
-	//		$info=request_status($id2[0],'bibid','s');					   
-	//	}
-	//	if($info[0] == 200){
+
 			$vas=getstatus_rta($info[1],$id);
-	//	}else{
-	//		$info=request_status($id2[0],'bibid','s');	
-	//		if($info[0] == 200) $vas=getstatus_rta($info[1],$id);
-	//	}
-		/*
-		if(empty($vas)){
-			$info=request_status($id2[0],'s');
-			if($info[0] == 200){
-				$vas=getstatus_rta($info[1],$id);
-			}
-		}
-		
-		*/
 		
 		$debug.="/In ISBN Mode AFTER TRUE ID/";
 		//if still fail, try ISBN
@@ -59,16 +43,7 @@ $vas= array();
 	}
 	}
    $debug=$id_old;
-/*	if(empty($vas)){
-		//try ISBN Only
-		$id2=trueid($id_tmp);
-		
-		$info=request_status($id2[1],'isbn');
-		if($info[0] == 200){
-			$vas=getstatus_rta($info[1],$id);
-		}
-	}
-	*/
+
 	if(empty($vas)&&$ids[1]=='georgemason'){
 	$json3 = file_get_contents('http://wrlcapi.wrlc.org/bibstatus/gm.php?id='.$id_old);
 	$data2 = simplexml_load_string($json3);

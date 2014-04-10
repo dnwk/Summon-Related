@@ -205,7 +205,7 @@ function request_status($id,$tpy){
 	$ch = curl_init();
 	if($tpy=='bibid') {
 	
-			curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 XML 2.0(CUA Query agent, lina@cua.edu, Rev 3.0) Summon RTA 2.0');
+			curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 XML 2.0(CUA Query agent, lina, Rev 3.0) Summon RTA 2.0');
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
 			curl_setopt($ch, 156, 15000); 

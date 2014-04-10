@@ -74,26 +74,7 @@ function getstatus_rta($jsonp,$id){
 		$request=TRUE;
 		}
 		if(!isset($request)) $request=false;
-		//set stackmap
-		/*
-		if($value[LOCATION_NAME]=='cuml stk'&&!isset($value[AVAILABILITY][TEMPLOCATION])&&!in_array($value[AVAILABILITY][ITEM_STATUS_DESC],array("Charged","Renewed"))){
-	
-			$callno='<a class="various" onclick=\'window.open("http://www.lib.cua.edu/stackmap/popup-map.php?term='.$callno.'", "newwindow", "width=750, height=650"); return false;\'  href="#">'.$callno.'</a><small>&lt;-Click on call number to see where is it!</small>';
-			
-		}
-		if($value[LOCATION_NAME]=='cuml juvf'&&!isset($value[AVAILABILITY][TEMPLOCATION])&&!in_array($value[AVAILABILITY][ITEM_STATUS_DESC],array("Charged","Renewed"))){
-			
-			$callno='<a class="various" onclick=\'window.open("http://www.lib.cua.edu/stackmap/popup-map.php?term=cumljuvf", "newwindow", "width=750, height=650"); return false;\' >'.$callno.'</a><small>&lt;-Click on call number to see where is it!</small>';
-		}
-		if($value[LOCATION_NAME]=='cuml foli'&&!isset($value[AVAILABILITY][TEMPLOCATION])&&!in_array($value[AVAILABILITY][ITEM_STATUS_DESC],array("Charged","Renewed"))){
-		
-			$callno='<a class="various" onclick=\'window.open("http://www.lib.cua.edu/stackmap/popup-map.php?term=cumlfoli", "newwindow", "width=750, height=650"); return false;\' href="">'.$callno.'</a>';
-		}
-		if($value[LOCATION_NAME]=='cuml per'&&!isset($value[AVAILABILITY][TEMPLOCATION])&&!in_array($value[AVAILABILITY][ITEM_STATUS_DESC],array("Charged","Renewed"))){
-		
-			$callno='<a class="various" onclick=\'window.open("http://www.lib.cua.edu/stackmap/popup-map.php?term=cumlper", "newwindow", "width=750, height=650"); return false;\' href="#">'.$callno.'</a>';
-		}
-		*/
+
 		//misc
 		
 		if($callno==NULL) $callno="";
@@ -101,6 +82,7 @@ function getstatus_rta($jsonp,$id){
 		
 		
 		if($libcode=='GM'&&strlen($availability_term)<=2){
+			//try to get GM data from other source
 			$tmpgm=convert_GM($real_ID);
 			if($tmpgm[0]=='Available'){
 				$availability_term='<span style="color:#090">Available</span>';
@@ -122,7 +104,7 @@ function getstatus_rta($jsonp,$id){
 			if(in_array('GM',$existinglib)&&$libcode=='GM') continue;
 		}
 		if($avs==TRUE)	{
-			$brdgeid="true";
+		$brdgeid="true";
 		 array_push($existinglib,$libcode);
 		}else{
 			array_push($noneexistinglib,$libcode);
@@ -160,19 +142,6 @@ function getstatus_rta($jsonp,$id){
 
 return $vas;
 
-}
-
-
-function get_duedate($id){
-	$json = file_get_contents('http://www.lib.cua.edu/z39/ava.php?bibid='.$id);
-	$data = json_decode($json, TRUE);
-	$timestr=strtotime($data["holdings"]["holding"]['circulations']['circulation']['availabilityDate']);
-	if($timestr!=FALSE)
-	{
-		return date('m/d/Y',$timestr);	
-	}else{
-		return false;	
-	}
 }
 
 

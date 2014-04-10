@@ -1,4 +1,4 @@
-RTA Feed
+Summon 1 JS file
 ==============
 
-RTA_XML_Feed Branch is code that feed Summon native RTA
+This branch is for Summon 1

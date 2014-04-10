@@ -16,7 +16,7 @@ $vas= array();
 		$vas=getstatus_rta($info[1],$id_tmp);
 	}
 
-
+	//if failed, get data from GM Z39.50
 	if(empty($vas)&&$source=='georgemason'){
 		$vas=get_status_gmz39($id_tmp);
 	}
